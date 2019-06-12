@@ -1,0 +1,69 @@
+<div class="ui grid" *ngIf="order">
+
+  <div class="twelve wide column">
+    <!--<h1 class="ui header">{{ order.books }}</h1> -->
+    <h3 class="ui header">User: {{ order?.user_id }}</h3>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="five wide column">
+        <span *ngFor="let book of order.books; last as b">
+          <p><b>Buch:</b> {{ book.title}}</p>
+          <p><b>Menge:</b> {{ book['pivot'].amount }}</p>
+          <p><b>Preis:</b> € {{book['pivot'].net_price}}</p>
+          <span *ngIf="!b"> </span>
+    </span>
+      </div>
+      <div class="five wide column">
+        <h4 class="ui header">Gesamtpreis: </h4>
+        € {{ order.total_amount }}
+      </div>
+
+    <div class="five wide column">
+      <h4 class="ui header">Lieferadresse: </h4>
+      <p>
+        {{ order.user.street}} {{ order.user.street_nr }} <br/>
+        {{order.user.zip}} {{order.user.city}} <br/>
+        {{order.user.country}}
+      </p>
+
+    </div>
+
+
+<div>
+  <div>
+    <b>Status:</b> {{status.type}}, {{status.description}}
+  </div>
+    <form *ngIf="authService.isAdmin()" [formGroup]="stateForm" (ngSubmit)="updateStatus()" class="ui form">
+      <div class="field">
+        <label for="description">Kommentar:
+        </label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+      <div class="field">
+        <label for="type">Status: </label>
+        <select id="type" formControlName="type">
+          <option value="offen">Offen</option>
+          <option value="bezahlt">Bezahlt</option>
+          <option value="versendet">Versendet</option>
+          <option value="storniert">Storniert</option>
+        </select>
+      </div>
+      <button class="tiny ui button red">Aktualisieren</button>
+    </form>
+</div>
+
+<!--<ng container>
+   <div *ngFor="let status of order.statuses">
+    <div class="column">
+      Satus ändern zu:
+      <select class="ui dropdown" (change)="changeState($event.target.value)">
+        <option> {{status.type}}</option>
+      </select>
+
+  <div class="sixteen wide column">
+    <h3 class="ui header">Beschreibung</h3>
+    <p>{{status.description}}</p>
+  </div>
+    </div>
+</ng>-->
+

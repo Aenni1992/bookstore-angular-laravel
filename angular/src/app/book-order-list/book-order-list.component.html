@@ -1,0 +1,17 @@
+<div *ngIf="isAdmin()" class="ui two item stackable tabs menu">
+
+  <a *ngFor="let user of users" class="item" [class.active]="selectedUser.id && user.id === selectedUser.id" (click)="setSelectedUser(user)">
+    {{user['name']}}
+  </a>
+
+</div>
+<div class="ui middle aligned selection divided list">
+  <ng-container *ngFor="let order of returnRightOrders()">
+    <a class="bs-book-order-item item"
+       [order]="order"
+       [routerLink]="order.id" >
+    </a>
+
+
+  </ng-container>
+</div>

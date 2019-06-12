@@ -1,0 +1,51 @@
+<div class="ui middle aligned selection divided list">
+  <ng-container *ngFor="let item of booksOrdered; let i = index" >
+  <a class="bs-book-list-item item"
+     [book]="item.book"
+     [routerLink]="item.book?.isbn" >
+  </a>
+
+    <div class="column">
+      <div class="row">
+        <div class="column">
+          <p>
+            <ng-container>
+              <div>
+                <span>Anzahl: </span>
+                <button class="ui icon button"
+                        (click)="decreaseAmount(i)">-
+                  <i class="arrow circle down icon"></i>
+                </button>
+                {{item.amount}}
+                <button class="ui icon button"
+                        (click)="increaseAmount(i)">+
+                  <i class="arrow circle up icon"></i>
+                </button>
+              </div>
+
+            </ng-container>
+
+    </div>
+
+    <button class="ui tiny blue labeled icon button"
+            (click)="removeItemFromBasket(book)" >
+      <i class="remove icon"></i>Buch entfernen
+    </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div>
+  <button class="ui tiny yellow labeled icon button"
+          (click)="checkLogin()" >
+    <i class="icon"></i>Bestellen
+  </button>
+    </div>
+  </ng-container>
+
+
+
+</div>
+
+
